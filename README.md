@@ -15,7 +15,7 @@ Wheel Chair Cleaning Machine Elements
 
 Program
 ================
-# Library #
+Library
 * SD.h
 * Wire.h
 * MPU6050.h
