@@ -24,7 +24,8 @@
 #include <Wire.h>
 #include <I2Cdev.h>
 #include <String.h>
-#include "Timer.h"
+#include <Event.h>
+#include <Timer.h>
 
 /*--------------GY521-----------------*/
 MPU6050 mpu;
@@ -130,10 +131,10 @@ void serialEvent() {
     incomingByte = Serial.read();
     if(incomingByte == 'a'){
       if(ifready){
-        Serial.write("yyyyyy");      //send many words to help APP fetch the value
+        Serial.write("yyyyy");      //send many words to help APP fetch the value
       }
       else {
-        Serial.write("nnnnnn");
+        Serial.write("nnnnn");
       }
     }
     if(incomingByte == 'c'){
@@ -141,18 +142,18 @@ void serialEvent() {
         Serial.write('y');
       }else Serial.write('n');
     }
-    if(incomingByte == '1'){
-        Serial.println("Start");
+    if(incomingByte == 's'){
+        //Serial.println("Start");
         analogWrite(WheelDrive_1, 255);
         analogWrite(WheelDrive_2, 255);
         t.after(5000,motor_stop);
-        if(incomingByte == '0'){
+        if(incomingByte == 't'){
             analogWrite(WheelDrive_1, 0);
             analogWrite(WheelDrive_2, 0);
         }
      }    
 
-    if(incomingByte == '0'){
+    if(incomingByte == 't'){
         analogWrite(WheelDrive_1, 0);
         analogWrite(WheelDrive_2, 0);
     }
@@ -181,11 +182,11 @@ void GetPosition(){
 
     //writeFile("gz1.txt", gz);
     //writeFile("gz2.txt", gz2);
-    delay(1000);
+    //delay(1000);
 
     if(gz2 < -500){
        digitalWrite(rLed,HIGH);
-       t.pulse(rLed,5000,LOW);
+       //t.pulse(rLed,5000,LOW);
        if(GrabValue == 1){
           ifready = true;
           GrabValue = 2;
